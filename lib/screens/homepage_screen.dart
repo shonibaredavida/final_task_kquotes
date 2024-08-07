@@ -2,7 +2,7 @@ import 'package:final_task_kquotes/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:final_task_kquotes/utils/constants/colors.dart';
 
-import 'functions/get_quotes.dart';
+import '../functions/get_quotes.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
