@@ -1,4 +1,4 @@
-import 'package:final_task_kquotes/splash_screen_controller.dart';
+import 'package:final_task_kquotes/controllers/splash_screen_controller.dart';
 import 'package:final_task_kquotes/utils/constants/images.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
 import 'package:final_task_kquotes/utils/constants/text.dart';

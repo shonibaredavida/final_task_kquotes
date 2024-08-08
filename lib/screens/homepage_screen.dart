@@ -1,35 +1,15 @@
+import 'package:final_task_kquotes/controllers/get_quote_controller.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:final_task_kquotes/utils/constants/colors.dart';
+import 'package:get/get.dart';
 
-import '../functions/get_quotes.dart';
-
-class HomePageScreen extends StatefulWidget {
-  const HomePageScreen({super.key});
-
-  @override
-  State<HomePageScreen> createState() => _HomePageScreenState();
-}
-
-class _HomePageScreenState extends State<HomePageScreen> {
-  List quotesList = [];
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    _getQuotes();
-    super.initState();
-  }
-
-  Future<void> _getQuotes() async {
-    quotesList = await getQuotes();
-    if (quotesList.isNotEmpty) {
-      setState(() {});
-    }
-  }
+class HomePageScreen extends StatelessWidget {
+  HomePageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(GetQuotesController());
     return Scaffold(
       drawer: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
       appBar: AppBar(
@@ -61,34 +41,36 @@ class _HomePageScreenState extends State<HomePageScreen> {
           Expanded(
             child: Container(
               color: whiteColor,
-              child: ListView.separated(
-                itemCount: quotesList.length,
-                itemBuilder: (BuildContext context, index) {
-                  return ListTile(
-                    leading: Container(
-                      width: 10,
-                      height: 10,
-                      alignment: Alignment.topLeft,
-                      child: Icon(
-                        Icons.menu_book_outlined,
-                        size: AppSizes.fontSizeXLg,
-                        color: primaryColor,
+              child: GetBuilder<GetQuotesController>(builder: (controller) {
+                return ListView.separated(
+                  itemCount: controller.quotesList.length,
+                  itemBuilder: (BuildContext context, index) {
+                    return ListTile(
+                      leading: Container(
+                        width: 10,
+                        height: 10,
+                        alignment: Alignment.topLeft,
+                        child: Icon(
+                          Icons.menu_book_outlined,
+                          size: AppSizes.fontSizeXLg,
+                          color: primaryColor,
+                        ),
                       ),
-                    ),
-                    title: Text(
-                      "\"${quotesList[index]['quote']} \"",
-                      style: const TextStyle(fontSize: AppSizes.fontSizeMs),
-                    ),
-                    subtitle: Text(
-                      quotesList[index]['author'],
-                      style: const TextStyle(fontSize: AppSizes.fontSizeSm),
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Divider();
-                },
-              ),
+                      title: Text(
+                        "\"${controller.quotesList[index]['quote']} \"",
+                        style: const TextStyle(fontSize: AppSizes.fontSizeMs),
+                      ),
+                      subtitle: Text(
+                        controller.quotesList[index]['author'],
+                        style: const TextStyle(fontSize: AppSizes.fontSizeSm),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider();
+                  },
+                );
+              }),
             ),
           ),
         ],

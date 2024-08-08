@@ -1,4 +1,4 @@
-import 'package:final_task_kquotes/splash_screen.dart';
+import 'package:final_task_kquotes/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
