@@ -1,4 +1,4 @@
-import 'package:final_task_kquotes/screens/homepage_screen.dart';
+import 'package:final_task_kquotes/screens/authscreen.dart';
 import 'package:get/get.dart';
 
 class SplashScreenController extends GetxController {
@@ -12,7 +12,7 @@ class SplashScreenController extends GetxController {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Get.off(HomePageScreen());
+        Get.off(const AuthScreen());
       },
     );
   }
