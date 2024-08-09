@@ -1,17 +1,18 @@
 import 'package:final_task_kquotes/controllers/get_quote_controller.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
+import 'package:final_task_kquotes/widget/my_drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:final_task_kquotes/utils/constants/colors.dart';
 import 'package:get/get.dart';
 
 class HomePageScreen extends StatelessWidget {
-  HomePageScreen({super.key});
+  const HomePageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(GetQuotesController());
     return Scaffold(
-      drawer: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
+      drawer: const MyDrawer(),
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
@@ -25,10 +26,10 @@ class HomePageScreen extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.fromLTRB(
-              AppSizes.mds * 1.5,
-              AppSizes.md,
-              AppSizes.mds * 1.5,
-              AppSizes.md * 2,
+              AppSizes.md * 1.5,
+              AppSizes.lg,
+              AppSizes.md * 1.5,
+              AppSizes.lg * 2,
             ),
             child: TextField(
               decoration: InputDecoration(
@@ -58,7 +59,7 @@ class HomePageScreen extends StatelessWidget {
                       ),
                       title: Text(
                         "\"${controller.quotesList[index]['quote']} \"",
-                        style: const TextStyle(fontSize: AppSizes.fontSizeMs),
+                        style: const TextStyle(fontSize: AppSizes.fontSizeSmb),
                       ),
                       subtitle: Text(
                         controller.quotesList[index]['author'],
