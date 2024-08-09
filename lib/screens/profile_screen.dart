@@ -1,3 +1,4 @@
+import 'package:final_task_kquotes/screens/homepage_screen.dart';
 import 'package:final_task_kquotes/utils/constants/colors.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -8,54 +9,67 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: greyLine.withOpacity(0.2),
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(AppSizes.lg),
-                  child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const Icon(
-                        Icons.chevron_left_rounded,
-                        size: AppSizes.buttonHeight,
-                      )),
-                )
-              ],
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          color: greyLine.withOpacity(0.2),
+          height: double.infinity,
+          width: double.infinity,
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  const Center(
-                    child: CircleAvatar(
-                      radius: AppSizes.spaceBtwSectionsXLg,
-                    ),
-                  ),
-                  const SizedBox(height: AppSizes.spaceBtwItemsLg * 2),
-                  Text(
-                    "FUllname",
-                    style: TextStyle(
-                        fontSize: AppSizes.fontSizeXXLg, color: greyLine),
-                  ),
-                  const SizedBox(height: AppSizes.spaceBtwItemsSm),
-                  Text(
-                    "Email",
-                    style: TextStyle(
-                        fontSize: AppSizes.fontSizeXLg, color: greyLine),
-                  ),
-                  const SizedBox(height: AppSizes.spaceBtwItemsLg * 2),
+                  Container(
+                    padding: const EdgeInsets.all(AppSizes.lg),
+                    child: GestureDetector(
+                        onTap: () {
+                          Get.to(const HomePageScreen());
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.chevron_left_rounded,
+                              size: AppSizes.buttonHeight,
+                            ),
+                            Text(
+                              "Back",
+                              style: TextStyle(fontSize: AppSizes.fontSizeLg),
+                            )
+                          ],
+                        )),
+                  )
                 ],
               ),
-            ),
-          ],
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: CircleAvatar(
+                        backgroundColor: primaryColor,
+                        radius: AppSizes.spaceBtwSectionsXLg,
+                      ),
+                    ),
+                    const SizedBox(height: AppSizes.spaceBtwItemsLg * 2),
+                    Text(
+                      "FUllname",
+                      style: TextStyle(
+                          fontSize: AppSizes.fontSizeXXLg, color: blackColor),
+                    ),
+                    const SizedBox(height: AppSizes.spaceBtwItemsSm),
+                    Text(
+                      "Email",
+                      style: TextStyle(
+                          fontSize: AppSizes.fontSizeXLg,
+                          color: blackColor.withOpacity(0.5)),
+                    ),
+                    const SizedBox(height: AppSizes.spaceBtwItemsLg * 2),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:final_task_kquotes/controllers/get_quote_controller.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
+import 'package:final_task_kquotes/widget/my_drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:final_task_kquotes/utils/constants/colors.dart';
 import 'package:get/get.dart';
@@ -9,9 +10,9 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final controller = Get.put(GetQuotesController());
+    final controller = Get.put(GetQuotesController());
     return Scaffold(
-      drawer: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
+      drawer: const MyDrawer(),
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
