@@ -32,47 +32,57 @@ class HomePageScreen extends StatelessWidget {
               AppSizes.lg * 2,
             ),
             child: TextField(
+              onChanged: (value) => controller.filterQuotes(value),
               decoration: InputDecoration(
+                  hintText: "Search Quotes",
                   contentPadding: const EdgeInsets.symmetric(
-                      vertical: AppSizes.xs, horizontal: AppSizes.sm),
+                      vertical: AppSizes.xs, horizontal: AppSizes.lg),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30))),
             ),
           ),
           Expanded(
             child: Container(
-              color: whiteColor,
-              child: GetBuilder<GetQuotesController>(builder: (controller) {
-                return ListView.separated(
-                  itemCount: controller.quotesList.length,
-                  itemBuilder: (BuildContext context, index) {
-                    return ListTile(
-                      leading: Container(
-                        width: 10,
-                        height: 10,
-                        alignment: Alignment.topLeft,
-                        child: Icon(
-                          Icons.menu_book_outlined,
-                          size: AppSizes.fontSizeXLg,
-                          color: primaryColor,
+                color: whiteColor,
+                child: Obx(
+                  () => controller.noResult.value
+                      ? const Center(
+                          child: Text("No Quote matches your Input"),
+                        )
+                      : ListView.separated(
+                          itemCount: controller.foundQuotes.value.length,
+                          itemBuilder: (BuildContext context, index) {
+                            return ListTile(
+                              leading: Container(
+                                width: 10,
+                                height: 10,
+                                alignment: Alignment.topLeft,
+                                child: Icon(
+                                  Icons.menu_book_outlined,
+                                  size: AppSizes.fontSizeXLg,
+                                  color: primaryColor,
+                                ),
+                              ),
+                              title: Text(
+                                "\"${controller.foundQuotes.value[index]['quote']} \"",
+                                style: const TextStyle(
+                                    fontSize: AppSizes.fontSizeSmb),
+                              ),
+                              subtitle: Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  controller.foundQuotes.value[index]['author'],
+                                  style: const TextStyle(
+                                      fontSize: AppSizes.fontSizeSm),
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider();
+                          },
                         ),
-                      ),
-                      title: Text(
-                        "\"${controller.quotesList[index]['quote']} \"",
-                        style: const TextStyle(fontSize: AppSizes.fontSizeSmb),
-                      ),
-                      subtitle: Text(
-                        controller.quotesList[index]['author'],
-                        style: const TextStyle(fontSize: AppSizes.fontSizeSm),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider();
-                  },
-                );
-              }),
-            ),
+                )),
           ),
         ],
       ),

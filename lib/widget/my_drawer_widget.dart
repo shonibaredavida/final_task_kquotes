@@ -1,4 +1,3 @@
-import "package:final_task_kquotes/screens/homepage_screen.dart";
 import "package:final_task_kquotes/screens/profile_screen.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -24,10 +23,10 @@ class _MyDrawerState extends State<MyDrawer> {
               bottom: 12,
             ),
             child: Column(
-              children: [
+              children: const [
                 Text(
                   "name",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: Colors.grey,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
@@ -63,7 +62,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           color: Colors.grey,
                         )),
                     onTap: () {
-                      Get.to(UserProfile());
+                      Get.to(const UserProfile());
                     }),
 
                 //LogOut

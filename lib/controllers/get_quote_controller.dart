@@ -2,23 +2,39 @@ import 'package:final_task_kquotes/functions/get_quotes.dart';
 import 'package:get/get.dart';
 
 class GetQuotesController extends GetxController {
-  final _quotesList = [].obs;
-
-  get quotesList => _quotesList;
-
+  List<dynamic> allQuotesList = [];
+  Rx<List<dynamic>> foundQuotes = Rx<List<dynamic>>([]);
+  Rx<bool> noResult = false.obs;
   Future<void> _getQuotes() async {
-    _quotesList.value = await getQuotes();
-
-    if (_quotesList.isNotEmpty) {
-      refresh();
-    }
+    allQuotesList = await getQuotes();
+    foundQuotes.value = allQuotesList;
   }
 
   @override
   void onInit() {
-    // TODO: implement onInit
     _getQuotes();
-
+    refresh();
     super.onInit();
+  }
+
+  void filterQuotes(String quoteText) {
+    noResult.value = false;
+    List<dynamic> results = [];
+    if (allQuotesList.isEmpty) {
+      results = allQuotesList;
+    } else {
+      results = allQuotesList.where((element) {
+        return element["quote"]
+                .toString()
+                .toLowerCase()
+                .contains(quoteText.toLowerCase()) ||
+            element["author"]
+                .toString()
+                .toLowerCase()
+                .contains(quoteText.toLowerCase());
+      }).toList();
+    }
+    if (results.isEmpty && quoteText.isNotEmpty) noResult.value = true;
+    foundQuotes.value = results;
   }
 }

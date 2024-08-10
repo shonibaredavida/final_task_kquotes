@@ -12,7 +12,7 @@ class SplashScreenController extends GetxController {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Get.off(HomePageScreen());
+        Get.off(const HomePageScreen());
       },
     );
   }
