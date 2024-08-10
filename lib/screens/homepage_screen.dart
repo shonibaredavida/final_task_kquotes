@@ -82,24 +82,6 @@ class HomePageScreen extends StatelessWidget {
                             return const Divider();
                           },
                         ),
-<<<<<<< Updated upstream
-=======
-                        title: Text(
-                          "$index\"${controller.quotesList[index]['quote']} \"",
-                          style:
-                              const TextStyle(fontSize: AppSizes.fontSizeSmb),
-                        ),
-                        subtitle: Text(
-                          controller.quotesList[index]['author'],
-                          style: const TextStyle(fontSize: AppSizes.fontSizeSm),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const Divider();
-                    },
-                  ),
->>>>>>> Stashed changes
                 )),
           ),
         ],
