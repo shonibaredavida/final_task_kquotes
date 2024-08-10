@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "package:get/get.dart";
 
 class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+  const MyDrawer({super.key});
 
   @override
   State<MyDrawer> createState() => _MyDrawerState();
@@ -22,8 +22,8 @@ class _MyDrawerState extends State<MyDrawer> {
               top: 26,
               bottom: 12,
             ),
-            child: Column(
-              children: const [
+            child: const Column(
+              children: [
                 Text(
                   "name",
                   style: TextStyle(

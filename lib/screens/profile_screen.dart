@@ -25,9 +25,9 @@ class UserProfile extends StatelessWidget {
                         onTap: () {
                           Get.to(const HomePageScreen());
                         },
-                        child: Row(
+                        child: const Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
+                          children: [
                             Icon(
                               Icons.chevron_left_rounded,
                               size: AppSizes.buttonHeight,
