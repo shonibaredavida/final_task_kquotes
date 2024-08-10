@@ -44,7 +44,7 @@ class _SignupTaPageState extends State<SignupTaPage> {
 
   saveInformationToDatabase(email, password) async {
     //authenticating the user using firebase
-    print(" creating user");
+    //  print(" creating user");
 
     // User? currentSeller;
 /*     await FirebaseAuth.instance
@@ -72,11 +72,11 @@ class _SignupTaPageState extends State<SignupTaPage> {
         namecontroller.text.isNotEmpty &&
         confirmPasswordController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
-      print(' form filled ');
+      // print(' form filled ');
       // email n name, password, confirmatio n given
       if (passwordController.text == confirmPasswordController.text) {
         //password n confirmation field are same
-        print(' password == confirmPassword');
+        //   print(' password == confirmPassword');
 
         showDialog(
             context: context,

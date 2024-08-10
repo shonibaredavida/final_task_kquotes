@@ -5,14 +5,14 @@ import 'package:final_task_kquotes/widget/custom_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:final_task_kquotes/functions/form_validation.dart';
 
-class LoginTab2Page extends StatefulWidget {
-  const LoginTab2Page({super.key});
+class SignupTabPage extends StatefulWidget {
+  const SignupTabPage({super.key});
 
   @override
-  State<LoginTab2Page> createState() => _LoginTab2PageState();
+  State<SignupTabPage> createState() => _SignupTabPageState();
 }
 
-class _LoginTab2PageState extends State<LoginTab2Page> {
+class _SignupTabPageState extends State<SignupTabPage> {
   bool showPass = false;
   bool passChecker = false;
   bool cpassChecker = false;

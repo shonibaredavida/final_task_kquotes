@@ -1,5 +1,4 @@
-import 'package:final_task_kquotes/screens/login_tab_page%202.dart';
-import 'package:final_task_kquotes/utils/constants/colors.dart';
+import 'package:final_task_kquotes/screens/signup_tab_page.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
 import 'package:final_task_kquotes/utils/validators/validators.dart';
 import 'package:final_task_kquotes/widget/custom_button_widget.dart';

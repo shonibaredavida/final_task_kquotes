@@ -1,5 +1,4 @@
 import "package:final_task_kquotes/screens/authscreen.dart";
-import "package:final_task_kquotes/screens/homepage_screen.dart";
 import "package:final_task_kquotes/screens/profile_screen.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -75,7 +74,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           color: Colors.grey,
                         )),
                     onTap: () {
-                      Get.to(AuthScreen());
+                      Get.to(const AuthScreen());
                       /*   //   FirebaseAuth.instance.signOut();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const MySplashScreen()));

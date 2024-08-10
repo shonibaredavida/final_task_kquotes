@@ -1,4 +1,4 @@
-import 'package:final_task_kquotes/screens/login_tab_page%202.dart';
+import 'package:final_task_kquotes/screens/signup_tab_page.dart';
 import 'package:final_task_kquotes/screens/login_tab_page.dart';
 import 'package:final_task_kquotes/utils/constants/images.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         body: const TabBarView(children: [
           LoginTabPage(),
-          LoginTab2Page(),
+          SignupTabPage(),
         ]),
       ),
     );
