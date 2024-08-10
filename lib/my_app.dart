@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Kodecamp Quotes',
       theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(background: const Color.fromARGB(255, 191, 190, 190))),
+              .copyWith(surface: const Color.fromARGB(255, 191, 190, 190))),
       home: const SplashScreen(),
     );
   }

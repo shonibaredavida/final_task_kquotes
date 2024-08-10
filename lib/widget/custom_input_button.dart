@@ -8,8 +8,7 @@ class CustomInputButton extends StatefulWidget {
   final Color? textColor;
 
   const CustomInputButton(this.title, this.buttonColor, this.textColor,
-      {Key? key})
-      : super(key: key);
+      {super.key});
 
   @override
   State<CustomInputButton> createState() => _CustomInputButtonState();
