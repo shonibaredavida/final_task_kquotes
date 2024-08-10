@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "279421399084",
+    "project_id": "kquotes-4d7d8",
+    "storage_bucket": "kquotes-4d7d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279421399084:android:698df45d477705d7552189",
+        "android_client_info": {
+          "package_name": "com.example.final_task_kquotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcQu930gD935DS41wxNQInMQq3soJEkEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
