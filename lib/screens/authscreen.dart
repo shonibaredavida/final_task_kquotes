@@ -1,5 +1,6 @@
+import 'package:final_task_kquotes/screens/login_tab_page%202.dart';
 import 'package:final_task_kquotes/screens/login_tab_page.dart';
-import 'package:final_task_kquotes/screens/signup_tab.dart';
+import 'package:final_task_kquotes/utils/constants/images.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -18,12 +19,21 @@ class _AuthScreenState extends State<AuthScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: const Text(
-            "Sign Up",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "KQuotes  ",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Image.asset(
+                AppImages.splashImage,
+                height: 30,
+              ),
+            ],
           ),
           bottom: const TabBar(
               indicatorColor: Colors.white54,
@@ -47,7 +57,7 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         body: const TabBarView(children: [
           LoginTabPage(),
-          SignupTaPage(),
+          LoginTab2Page(),
         ]),
       ),
     );

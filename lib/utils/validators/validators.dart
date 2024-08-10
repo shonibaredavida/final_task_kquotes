@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppValidator {
   static String? validEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -18,25 +20,33 @@ class AppValidator {
     return null;
   }
 
-  static String? validatePassword(String? value) {
+  static String? validatePassword(String? value,
+      {bool cpassword = false, String? pswString}) {
     if (value == null || value.isEmpty) {
-      return 'Password is required';
+      if (cpassword) {
+        return 'Password is required';
+      } else {
+        return "Confirm Password is required";
+      }
     }
 
-    if (value.length < 6) {
-      return 'Password must be at least 6 Characters long';
+    if (!cpassword && value.length < 8) {
+      return 'Password must be at least 8 Characters long';
     }
 
-    if (!value.contains(RegExp(r'[A-Z]'))) {
+    if (!cpassword && !value.contains(RegExp(r'[A-Z]'))) {
       return 'Password must contain at least one uppercase letter';
     }
 
-    if (!value.contains(RegExp(r'[0-9]'))) {
+    if (!cpassword && !value.contains(RegExp(r'[0-9]'))) {
       return 'Password must contain at least one number';
     }
 
-    if (!value.contains(RegExp(r'[!@#$%^&*(),.?:{}|<>]'))) {
+    if (!cpassword && !value.contains(RegExp(r'[!@#$%^&*(),.?:{}|<>]'))) {
       return 'Password must contain at least one special character';
+    }
+    if (cpassword && pswString != value) {
+      return "should be same as in Password, ";
     }
 
     return null;

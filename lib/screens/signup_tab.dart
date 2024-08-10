@@ -18,9 +18,7 @@ class _SignupTaPageState extends State<SignupTaPage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String downloadUrlImage = "";
-  // XFile? imgXFile;
-  // final ImagePicker imagePicker = ImagePicker();
+
   bool dev = true;
 
 /*   saveInfoToFireStoreAndLocally(User currentUser) async {
@@ -113,25 +111,26 @@ class _SignupTaPageState extends State<SignupTaPage> {
           const SizedBox(height: 12),
           //input Field
           Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CustomTextField(
-                      namecontroller, Icons.person, false, true, "Name"),
-                  CustomTextField(
-                      emailController, Icons.email, false, true, "Email"),
-                  CustomTextField(
-                      passwordController, Icons.lock, true, true, "Password"),
-                  CustomTextField(confirmPasswordController, Icons.lock, true,
-                      true, "Confirm Password"),
-                  CustomTextField(
-                      phoneController, Icons.lock, false, true, "Phone Number"),
-                  CustomTextField(
-                      locationController, Icons.lock, false, true, "Address"),
-                  const SizedBox(height: 20),
-                ],
-              ),),
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomTextField(
+                    namecontroller, Icons.person, false, true, "Name"),
+                CustomTextField(
+                    emailController, Icons.email, false, true, "Email"),
+                CustomTextField(
+                    passwordController, Icons.lock, true, true, "Password"),
+                CustomTextField(confirmPasswordController, Icons.lock, true,
+                    true, "Confirm Password"),
+                CustomTextField(
+                    phoneController, Icons.phone, false, true, "Phone Number"),
+                CustomTextField(
+                    locationController, Icons.home, false, true, "Address"),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).primaryColor,

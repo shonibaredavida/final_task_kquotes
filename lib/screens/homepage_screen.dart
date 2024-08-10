@@ -6,7 +6,9 @@ import 'package:final_task_kquotes/utils/constants/colors.dart';
 import 'package:get/get.dart';
 
 class HomePageScreen extends StatelessWidget {
-  const HomePageScreen({super.key});
+  const HomePageScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

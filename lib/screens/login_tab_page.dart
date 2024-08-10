@@ -1,7 +1,10 @@
-import 'package:final_task_kquotes/widget/custom_text_field.dart';
-import 'package:final_task_kquotes/widget/loading_dialog.dart';
+import 'package:final_task_kquotes/screens/login_tab_page%202.dart';
+import 'package:final_task_kquotes/utils/constants/colors.dart';
+import 'package:final_task_kquotes/utils/constants/sizes.dart';
+import 'package:final_task_kquotes/utils/validators/validators.dart';
+import 'package:final_task_kquotes/widget/custom_button_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:final_task_kquotes/functions/form_validation.dart';
 
 class LoginTabPage extends StatefulWidget {
   const LoginTabPage({super.key});
@@ -11,91 +14,121 @@ class LoginTabPage extends StatefulWidget {
 }
 
 class _LoginTabPageState extends State<LoginTabPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  validateForm() {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      print('initiating login ');
-    } else if (emailController.text.isEmpty) {
-      print('form validation-- kindly enter mail ');
-      Fluttertoast.showToast(msg: "Kindly enter your email");
-    } else if (passwordController.text.isEmpty) {
-      print('form validation-- kindly enter password ');
-      Fluttertoast.showToast(msg: "KIindly enter your password");
-    } else {
-      print('form validation-- kindly enter mail n password ');
-      Fluttertoast.showToast(
-          msg: "Kindly enter your email and password details");
-    }
-  }
-
-/*   loginnow() async {
-    User? currentSeller;
-
-    print('form log in Checking your credentials from firebse');
-    showDialog(
-        context: context,
-        builder: (c) => const LoadingDialogWidget(
-              message: "Checking your credentials ",
-            ));
-
-    await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim())
-        .then((auth) => currentSeller = auth.user)
-        .catchError((errorMessage) {
-      print('hecking your credentials..error occured');
-
-      Navigator.of(context).pop();
-      Fluttertoast.showToast(msg: "Error occured \n $errorMessage");
-      return null;
-    });
-    if (currentSeller != null) {
-      print('Checking your credentials.. found user');
-
-      checkIfSellerRecordExist(currentSeller);
-    }
-  } */
-
+  bool showPass = false;
+  bool passChecker = false;
+  final formKey = GlobalKey<FormState>();
+  bool inAgreement = false;
+  final nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      color: const Color.fromARGB(91, 167, 156, 156),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Form(
+    return Scaffold(
+      body: SafeArea(
+        child: Form(
             key: formKey,
-            child: Column(
-              children: [
-                CustomTextField(
-                    emailController, Icons.email, false, true, "Email"),
-                CustomTextField(
-                    passwordController, Icons.lock, true, true, "Password"),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 15, horizontal: 100),
-            ),
-            onPressed: () {
-              print('initiating the form validation ');
-              validateForm();
-            },
-            child: const Text(
-              "Login",
-              style: TextStyle(color: Colors.white),
-            ),
-          )
-        ],
+            child: Container(
+              padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
+              child: ListView(
+                children: [
+                  const SizedBox(height: AppSizes.spaceBtwSectionsLg),
+                  FormEntry(
+                    textController: emailController,
+                    entryTitle: "Email address",
+                    keyboardType: TextInputType.emailAddress,
+                    validator: AppValidator.validEmail(emailController.text),
+                  ),
+                  const SizedBox(
+                    height: AppSizes.spaceBtwSectionsSm * 0.5,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  FormEntry(
+                    textController: passwordController,
+                    entryTitle: "Password",
+                    obscurePassword: !showPass,
+                    onChanged: (value) {
+                      setState(() {
+                        if (value.length > 7) {
+                          passChecker = true;
+                        } else {
+                          passChecker = false;
+                        }
+                      });
+                    },
+                    suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            showPass = !showPass;
+                          });
+                        },
+                        child: showPass
+                            ? const Icon(Icons.remove_red_eye_outlined)
+                            : const Icon(Icons.remove_red_eye)),
+                    isPasswordField: true,
+                    validator:
+                        AppValidator.validatePassword(passwordController.text),
+                  ),
+                  /*   TextFormField(
+                    controller: passwordController,
+                    validator: (value) {
+                      //  validatepassword(value);
+                      if (value == null ||
+                          value.isEmpty ||
+                          value.trim().length < 8) {
+                        return "Password Contain atleast 8 characters";
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        if (value.length > 7) {
+                          passChecker = true;
+                        } else {
+                          passChecker = false;
+                        }
+                      });
+                    },
+                    obscureText: !showPass,
+                    decoration: InputDecoration(
+                      suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              showPass = !showPass;
+                            });
+                          },
+                          child: showPass
+                              ? const Icon(Icons.remove_red_eye_outlined)
+                              : const Icon(Icons.remove_red_eye)),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                 */
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomButton(
+                    title: "Login",
+                    link: () {
+                      validateForm(
+                        context: context,
+                        key: formKey,
+                      );
+                    },
+                    horizontalPadding: 0,
+                  ),
+                ],
+              ),
+            )),
       ),
     );
   }

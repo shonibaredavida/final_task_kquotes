@@ -1,3 +1,4 @@
+import "package:final_task_kquotes/screens/authscreen.dart";
 import "package:final_task_kquotes/screens/homepage_screen.dart";
 import "package:final_task_kquotes/screens/profile_screen.dart";
 import "package:flutter/material.dart";
@@ -53,7 +54,6 @@ class _MyDrawerState extends State<MyDrawer> {
                       Get.back();
                     }),
 
-                //Not Yet Received
                 const Divider(height: 10, thickness: 2, color: Colors.grey),
                 ListTile(
                     leading: const Icon(Icons.picture_in_picture_alt_rounded,
@@ -75,6 +75,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           color: Colors.grey,
                         )),
                     onTap: () {
+                      Get.to(AuthScreen());
                       /*   //   FirebaseAuth.instance.signOut();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const MySplashScreen()));
