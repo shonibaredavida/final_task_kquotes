@@ -2,8 +2,12 @@ import 'package:final_task_kquotes/screens/signup_tab_page.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
 import 'package:final_task_kquotes/utils/validators/validators.dart';
 import 'package:final_task_kquotes/widget/custom_button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:final_task_kquotes/functions/form_validation.dart';
+
+import '../firebase_auth/firebase_functions.dart';
+import '../widget/form_element.dart';
 
 class LoginTabPage extends StatefulWidget {
   const LoginTabPage({super.key});
@@ -12,14 +16,34 @@ class LoginTabPage extends StatefulWidget {
   State<LoginTabPage> createState() => _LoginTabPageState();
 }
 
-class _LoginTabPageState extends State<LoginTabPage> {
+class _LoginTabPageState extends State<LoginTabPage> {  
+  final FirebaseAuthServices _auth= FirebaseAuthServices();  
+ 
   bool showPass = false;
   bool passChecker = false;
   final formKey = GlobalKey<FormState>();
-  bool inAgreement = false;
-  final nameController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+
+    @override
+  void dispose() {
+    passwordController.dispose();  
+    emailController.dispose();
+    super.dispose();
+  } 
+  
+   void _signIn( context) async{
+       String email=emailController.text;
+    String password= passwordController.text;
+       User? user=await  _auth.signinWithEmailAndPassword(email, password);
+       if(user!=null){
+        print("User logged in Successfully");
+       authDialog(context, true);
+       }else{
+        print ("some error occured");
+       }
+                                                                                                                                   
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,10 +142,9 @@ class _LoginTabPageState extends State<LoginTabPage> {
                   CustomButton(
                     title: "Login",
                     link: () {
-                      validateForm(
-                        context: context,
-                        key: formKey,
-                      );
+                      if(formKey.currentState!.validate()){
+_signIn(context);
+                          }
                     },
                     horizontalPadding: 0,
                   ),

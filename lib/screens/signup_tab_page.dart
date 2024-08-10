@@ -1,9 +1,16 @@
+import 'package:final_task_kquotes/firebase_auth/firebase_functions.dart';
+import 'package:final_task_kquotes/screens/homepage_screen.dart';
 import 'package:final_task_kquotes/utils/constants/colors.dart';
+import 'package:final_task_kquotes/utils/constants/images.dart';
 import 'package:final_task_kquotes/utils/constants/sizes.dart';
 import 'package:final_task_kquotes/utils/validators/validators.dart';
 import 'package:final_task_kquotes/widget/custom_button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:final_task_kquotes/functions/form_validation.dart';
+import 'package:get/get.dart';
+
+import '../widget/form_element.dart';
 
 class SignupTabPage extends StatefulWidget {
   const SignupTabPage({super.key});
@@ -13,6 +20,7 @@ class SignupTabPage extends StatefulWidget {
 }
 
 class _SignupTabPageState extends State<SignupTabPage> {
+  final FirebaseAuthServices _auth= FirebaseAuthServices();  
   bool showPass = false;
   bool passChecker = false;
   bool cpassChecker = false;
@@ -23,6 +31,29 @@ class _SignupTabPageState extends State<SignupTabPage> {
   final nameController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    nameController.dispose();
+    cpasswordController.dispose(); 
+    passwordController.dispose();  
+    emailController.dispose();
+    super.dispose();
+  }
+
+  void _signUp( context) async{
+       String email=emailController.text;
+    //   String username= nameController.text;
+       String password= cpasswordController.text;   
+       User? user=await  _auth.signupWithEmailAndPassword(email, password);
+       if(user!=null){
+        print("User created Successfully");
+       authDialog(context, false);
+       }else{
+        print ("some error occured");
+       }
+                                                                                                                                   
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,25 +73,15 @@ class _SignupTabPageState extends State<SignupTabPage> {
                     //first name Field
                     FormEntry(
                       textController: nameController,
-                      entryTitle: "First Name",
+                      entryTitle: "Username",
                       keyboardType: TextInputType.name,
                       validator: AppValidator.validateEmptyText(
-                          "First Name", nameController.text),
+                          "Username", nameController.text),
                     ),
                     const SizedBox(
                       height: AppSizes.spaceBtwSectionsSm * 0.5,
                     ),
-                    //Last name field
-                    FormEntry(
-                      textController: lNameController,
-                      entryTitle: "Last Name",
-                      keyboardType: TextInputType.name,
-                      validator: AppValidator.validateEmptyText(
-                          "Last Name", lNameController.text),
-                    ),
-                    const SizedBox(
-                      height: AppSizes.spaceBtwSectionsSm * 0.5,
-                    ),
+                 
                     //email entry
                     FormEntry(
                       textController: emailController,
@@ -100,7 +121,8 @@ class _SignupTabPageState extends State<SignupTabPage> {
                     ),
                     const SizedBox(
                       height: AppSizes.spaceBtwSectionsSm * 0.5,
-                    ), //confirm Password
+                    ), 
+                    //confirm Password
                     FormEntry(
                       textController: cpasswordController,
                       entryTitle: "Confirm Password",
@@ -170,12 +192,11 @@ class _SignupTabPageState extends State<SignupTabPage> {
                       title: "Register",
                       link: () {
                         if (inAgreement) {
-                          //  print(name + "newnam10101 byr");
-
-                          validateForm(
-                              context: context,
-                              key: formKey2,
-                              loginPage: false);
+                          //  print(name + "newnam10101 byr");/*  if (key.currentState!.validate()) {*/
+                          if(formKey2.currentState!.validate()){
+_signUp(context);
+                          }
+                          
                         } else {
                           showDialog(
                             context: context,
@@ -203,57 +224,47 @@ class _SignupTabPageState extends State<SignupTabPage> {
   }
 }
 
-class FormEntry extends StatelessWidget {
-  const FormEntry({
-    super.key,
-    required this.textController,
-    this.keyboardType,
-    required this.entryTitle,
-    required this.validator,
-    this.onChanged,
-    this.isPasswordField = false,
-    this.obscurePassword = false,
-    this.suffixIcon,
-  });
-  final TextInputType? keyboardType;
-  final String entryTitle;
-  final TextEditingController textController;
-  final String? validator;
-  final void Function(String)? onChanged;
-  final bool isPasswordField;
-  final bool obscurePassword;
-  final Widget? suffixIcon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          entryTitle,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: AppSizes.md,
-        ),
-        TextFormField(
-          controller: textController,
-          keyboardType: keyboardType ?? TextInputType.name,
-          validator: (value) {
-            return validator;
-          },
-          onChanged: onChanged,
-          obscureText: obscurePassword,
-          decoration: InputDecoration(
-            suffixIcon: isPasswordField ? suffixIcon : null,
-            //  label: const Text('Name'),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-        ),
-      ],
-    );
+void validateForm({context, key, bool loginPage = true}) {
+  if (key.currentState!.validate()) {
+    
+    authDialog(context, loginPage);
+    Future.delayed(const Duration(seconds: 2), () {
+      key.currentState!.save();
+      Get.to(const HomePageScreen());
+    });
   }
+}
+
+Future<dynamic> authDialog(context, bool loginPage) {
+  return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                AppImages.splashImage,
+                height: AppSizes.spaceBtwSectionsLg,
+              ),
+              const SizedBox(
+                height: AppSizes.lg,
+              ),
+              Text(
+                !loginPage
+                    ? " Registration Successful !!!"
+                    : "Login Successful !!!",
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 20),
+              ),
+              const SizedBox(height: 20),
+              const Text(" Redirecting you to KQuote")
+            ],
+          ),
+          actionsAlignment: MainAxisAlignment.center,
+        );
+      });
 }

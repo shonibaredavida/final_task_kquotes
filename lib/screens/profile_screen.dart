@@ -25,9 +25,9 @@ class UserProfile extends StatelessWidget {
                         onTap: () {
                           Get.to(const HomePageScreen());
                         },
-                        child: Row(
+                        child:const Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
+                          children:  [
                             Icon(
                               Icons.chevron_left_rounded,
                               size: AppSizes.buttonHeight,
@@ -53,7 +53,7 @@ class UserProfile extends StatelessWidget {
                     ),
                     const SizedBox(height: AppSizes.spaceBtwItemsLg * 2),
                     Text(
-                      "FUllname",
+                      "Username",
                       style: TextStyle(
                           fontSize: AppSizes.fontSizeXXLg, color: blackColor),
                     ),

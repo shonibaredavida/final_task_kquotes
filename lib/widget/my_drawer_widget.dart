@@ -1,5 +1,6 @@
 import "package:final_task_kquotes/screens/authscreen.dart";
 import "package:final_task_kquotes/screens/profile_screen.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
@@ -23,8 +24,8 @@ class _MyDrawerState extends State<MyDrawer> {
               top: 26,
               bottom: 12,
             ),
-            child: Column(
-              children: const [
+            child:const Column(
+              children:  [
                 Text(
                   "name",
                   style: TextStyle(
@@ -74,9 +75,9 @@ class _MyDrawerState extends State<MyDrawer> {
                           color: Colors.grey,
                         )),
                     onTap: () {
+                         FirebaseAuth.instance.signOut();
                       Get.to(const AuthScreen());
-                      /*   //   FirebaseAuth.instance.signOut();
-                      Navigator.of(context).push(MaterialPageRoute(
+                     /*   Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const MySplashScreen()));
                    */
                     }),

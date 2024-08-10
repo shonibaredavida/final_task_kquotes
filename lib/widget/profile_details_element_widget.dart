@@ -15,10 +15,10 @@ class ProfileDetailsListileWidget extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: ListTile(
-        leading: Column(
+        leading:const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children:  [
             Icon(Icons.person),
           ],
         ),

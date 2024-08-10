@@ -8,13 +8,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Kodecamp Quotes',
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(background: const Color.fromARGB(255, 191, 190, 190))),
-      home: const SplashScreen(),
+        home:  SplashScreen(),
     );
   }
 }
