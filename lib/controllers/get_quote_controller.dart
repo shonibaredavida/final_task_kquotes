@@ -12,7 +12,6 @@ class GetQuotesController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     _getQuotes();
     refresh();
     super.onInit();
