@@ -3,7 +3,7 @@ import 'package:final_task_kquotes/utils/constants/text.dart';
 import 'package:http/http.dart' as http;
 
 var _loadedQuotes = [];
-Future<List> getQuotes() async {
+Future<List<dynamic>> getQuotes() async {
   final url = Uri.parse(QuoteString.url + QuoteString.endPoint);
   final response = await http.get(url);
 
