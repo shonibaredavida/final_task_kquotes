@@ -5,11 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:my_quote_app/controller/auth_controller.dart';
-import 'package:my_quote_app/function/function.dart';
-import 'package:my_quote_app/screens/login.dart';
 
+import '../controller/auth_controller.dart';
+import '../function/function.dart';
 import '../models/user_model.dart';
+import '../screens/login.dart';
 
 class FirebaseService {
   final firebaseAuth = FirebaseAuth.instance;
@@ -38,7 +38,7 @@ class FirebaseService {
             showErrorMessgae(e.code),
             textAlign: TextAlign.center,
           ));
-      print(" create account level " + e.code);
+      //     print(" create account level " + e.code);
 
       // You can either return null or throw an exception.
 
@@ -46,7 +46,7 @@ class FirebaseService {
       // Or if you prefer to throw the error:
       //   throw FirebaseAuthException(code: errorMessage);
     } catch (e) {
-      print('Error: $e');
+      //  print('Error: $e');
       return null;
     }
   }
@@ -61,11 +61,11 @@ class FirebaseService {
         email: email,
         password: password,
       );
-      print("LOGGED IN ${credential.user!.email}");
+      //  print("LOGGED IN ${credential.user!.email}");
 
       return credential;
     } on FirebaseAuthException catch (e) {
-      print("NONONONON");
+      ///  print("NONONONON");
       String errorMessage = showErrorMessgae(e.code);
       showQdialog(
         titleText: "Error",
@@ -74,9 +74,9 @@ class FirebaseService {
           textAlign: TextAlign.center,
         ),
       );
-      print(e.code);
+      //   print(e.code);
       //Future.delayed(const Duration(seconds: 3), () {});
-      print("ERROR CANT GET USER $errorMessage");
+      //  print("ERROR CANT GET USER $errorMessage");
       return null;
     } catch (e) {
       showQdialog(
@@ -86,7 +86,7 @@ class FirebaseService {
           textAlign: TextAlign.center,
         ),
       ); //  showQdialog(titleText: "Error!!!", contentWidget: Text(e.toString()));
-      print('1111111Error: $e');
+      //  print('1111111Error: $e');
       return null;
     }
   }

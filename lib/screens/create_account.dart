@@ -1,7 +1,7 @@
+import 'package:final_task_kquotes/screens/home_page.dart';
+import 'package:final_task_kquotes/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_quote_app/screens/home_page.dart';
-import 'package:my_quote_app/screens/login.dart';
 import '../controller/auth_controller.dart';
 import '../utils/constants/colors.dart';
 import '../utils/constants/images.dart';

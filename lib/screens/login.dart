@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_quote_app/screens/create_account.dart';
-import 'package:my_quote_app/screens/home_page.dart';
-import 'package:my_quote_app/utils/constants/images.dart';
 import '../controller/auth_controller.dart';
 import '../utils/constants/colors.dart';
+import '../utils/constants/images.dart';
 import '../utils/constants/sizes.dart';
 import '../widgets/button.dart';
 import '../widgets/input_field.dart';
 import 'package:get/get.dart';
+
+import 'create_account.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
