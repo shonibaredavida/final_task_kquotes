@@ -1,17 +1,28 @@
-import 'package:final_task_kquotes/my_app.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_quote_app/firebase_options.dart';
+import 'package:my_quote_app/screens/splash_screen.dart';
+import 'package:my_quote_app/utils/constants/colors.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      /*  options: FirebaseOptions(
-          apiKey: "AIzaSyA3RH_ainaNXxQ2RA48Cu2x_OtQr2qQBKs",
-          authDomain: "kquotes-4d7d8.firebaseapp.com",
-          projectId: "kquotes-4d7d8",
-          storageBucket: "kquotes-4d7d8.appspot.com",
-          messagingSenderId: "279421399084",
-          appId: "1:279421399084:web:3c627415f52d31f7552189") */
-      );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      theme: ThemeData(
+        primarySwatch: primaryColor,
+      ),
+      home: const SplashScreen(),
+    );
+  }
 }

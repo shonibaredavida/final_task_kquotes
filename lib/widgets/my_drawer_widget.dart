@@ -1,8 +1,11 @@
-import "package:final_task_kquotes/screens/authscreen.dart";
-import "package:final_task_kquotes/screens/profile_screen.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
+import "package:my_quote_app/screens/login.dart";
+import "package:my_quote_app/screens/profile.dart";
+import "package:my_quote_app/utils/constants/text.dart";
+
+import "../utils/constants/images.dart";
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -15,25 +18,23 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.black54,
+      backgroundColor: const Color.fromARGB(255, 35, 5, 86),
       child: ListView(
         children: [
           //header
-          Container(
-            padding: const EdgeInsets.only(
-              top: 26,
-              bottom: 12,
-            ),
-            child:const Column(
-              children:  [
-                Text(
-                  "name",
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+          DrawerHeader(
+            child: Column(
+              children: [
+                Image.asset(
+                  AppImage.splashImage2,
+                  height: 80,
                 ),
-                SizedBox(height: 12)
+                const SizedBox(height: 2),
+                Text(
+                  QuoteString.appName,
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                )
               ],
             ),
           ), //body
@@ -41,14 +42,12 @@ class _MyDrawerState extends State<MyDrawer> {
             padding: const EdgeInsets.only(top: 1),
             child: Column(
               children: [
-                const Divider(height: 10, thickness: 2, color: Colors.grey),
-
                 //Home
                 ListTile(
-                    leading: const Icon(Icons.home, color: Colors.grey),
+                    leading: const Icon(Icons.home, color: Colors.white),
                     title: const Text("Home",
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Colors.white,
                         )),
                     onTap: () {
                       Get.back();
@@ -57,27 +56,28 @@ class _MyDrawerState extends State<MyDrawer> {
                 const Divider(height: 10, thickness: 2, color: Colors.grey),
                 ListTile(
                     leading: const Icon(Icons.picture_in_picture_alt_rounded,
-                        color: Colors.grey),
+                        color: Colors.white),
                     title: const Text("My Profile",
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Colors.white,
                         )),
                     onTap: () {
-                      Get.to(const UserProfile());
+                      Get.to(ProfilePage());
                     }),
 
                 //LogOut
+
                 const Divider(height: 10, thickness: 2, color: Colors.grey),
                 ListTile(
-                    leading: const Icon(Icons.exit_to_app, color: Colors.grey),
+                    leading: const Icon(Icons.exit_to_app, color: Colors.white),
                     title: const Text("LogOut",
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Colors.white,
                         )),
                     onTap: () {
-                         FirebaseAuth.instance.signOut();
-                      Get.to(const AuthScreen());
-                     /*   Navigator.of(context).push(MaterialPageRoute(
+                      FirebaseAuth.instance.signOut();
+                      Get.to(LoginPage());
+                      /*   Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const MySplashScreen()));
                    */
                     }),
