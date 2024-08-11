@@ -1,9 +1,10 @@
-import 'package:final_task_kquotes/controllers/splash_screen_controller.dart';
-import 'package:final_task_kquotes/utils/constants/images.dart';
-import 'package:final_task_kquotes/utils/constants/sizes.dart';
-import 'package:final_task_kquotes/utils/constants/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../controller/splash_screen_controller.dart';
+import '../utils/constants/images.dart';
+import '../utils/constants/sizes.dart';
+import '../utils/constants/text.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -17,7 +18,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              AppImages.splashImage,
+              AppImage.splashImage,
               height: 150,
             ),
             Text(
@@ -28,7 +29,7 @@ class SplashScreen extends StatelessWidget {
                   wordSpacing: 0.5),
             ),
             const SizedBox(
-              height: AppSizes.spaceBtwSectionsSm,
+              height: AppSizes.iconSize,
             )
           ],
         ),

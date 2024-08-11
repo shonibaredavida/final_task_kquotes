@@ -1,106 +1,95 @@
-import 'package:final_task_kquotes/screens/homepage_screen.dart';
-import 'package:final_task_kquotes/utils/constants/colors.dart';
-import 'package:final_task_kquotes/utils/constants/sizes.dart';
+import 'package:final_task_kquotes/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/auth_controller.dart';
+import '../controller/home_page_controller.dart';
+import '../services/quote_services.dart';
+import '../utils/constants/colors.dart';
+import '../utils/constants/images.dart';
+import '../utils/constants/sizes.dart';
+import '../widgets/my_drawer_widget.dart';
 
-class UserProfile extends StatelessWidget {
-  const UserProfile({super.key});
+class ProfilePage extends StatelessWidget {
+  ProfilePage({super.key});
+
+  final AuthController authController = Get.find();
+  final homePageController =
+      Get.put(HomePageController(quoteService: QuoteService()));
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          color: greyLine.withOpacity(0.2),
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(AppSizes.lg),
-                    child: GestureDetector(
-                        onTap: () {
-                          Get.to(const HomePageScreen());
-                        },
-                        child: const Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.chevron_left_rounded,
-                              size: AppSizes.buttonHeight,
-                            ),
-                            Text(
-                              "Back",
-                              style: TextStyle(fontSize: AppSizes.fontSizeLg),
-                            )
-                          ],
-                        )),
-                  )
-                ],
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: CircleAvatar(
-                        backgroundColor: primaryColor,
-                        radius: AppSizes.spaceBtwSectionsXLg,
+    return Scaffold(
+      drawer: const MyDrawer(),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.offAll(HomePage());
+          },
+          icon: const Icon(Icons.arrow_back_ios_new),
+        ),
+        centerTitle: true,
+        title: const Text(
+          'User Profile',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: AppSizes.fontSizeLg,
+              fontWeight: AppSizes.fontWeightBold),
+        ),
+        automaticallyImplyLeading: false,
+      ),
+      body: SafeArea(
+        child: Obx(
+          () => Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Column(
+              children: [
+                Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: AppSizes.mediumDefaultSpace,
                       ),
-                    ),
-                    const SizedBox(height: AppSizes.spaceBtwItemsLg * 2),
-                    Text(
-                      "FUllname",
-                      style: TextStyle(
-                          fontSize: AppSizes.fontSizeXXLg, color: blackColor),
-                    ),
-                    const SizedBox(height: AppSizes.spaceBtwItemsSm),
-                    Text(
-                      "Email",
-                      style: TextStyle(
-                          fontSize: AppSizes.fontSizeXLg,
-                          color: blackColor.withOpacity(0.5)),
-                    ),
-                    const SizedBox(height: AppSizes.spaceBtwItemsLg * 2),
-                  ],
+                      CircleAvatar(
+                        child: Image.asset(
+                          AppImage.profileimage,
+                          fit: BoxFit.cover,
+                        ),
+                        radius: 100.0,
+                      ),
+                      const SizedBox(
+                        height: AppSizes.mediumDefaultSpace,
+                      ),
+                      Text(
+                        homePageController.userModel.value.fullName,
+                        style: const TextStyle(
+                            fontSize: AppSizes.fontSizeMd,
+                            fontWeight: AppSizes.fontWeightW400,
+                            color: black),
+                      ),
+                      Text(
+                        homePageController.userModel.value.email,
+                        style: const TextStyle(
+                            fontSize: AppSizes.fontSizeSm,
+                            fontWeight: AppSizes.fontWeightNormal,
+                            color: black),
+                      ),
+                      const Text(
+                        'Edit Your Profile',
+                        style: TextStyle(
+                          fontSize: AppSizes.fontSizeMd,
+                          fontWeight: AppSizes.fontWeightNormal,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: AppSizes.defaultSpace),
+              ],
+            ),
           ),
         ),
       ),
     );
-    /*  child:
-    Container(
-      child: Container(
-        color: greyLine.withOpacity(0.2),
-        height: double.infinity,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: CircleAvatar(
-                radius: AppSizes.spaceBtwSectionsXLg,
-              ),
-            ),
-            SizedBox(height: AppSizes.spaceBtwItems),
-            Text(
-              "detailTitle",
-              style: TextStyle(fontSize: AppSizes.fontSizeMd, color: greyLine),
-            ),
-            SizedBox(height: AppSizes.spaceBtwItems),
-            Text(
-              "detailTitle",
-              style: TextStyle(fontSize: AppSizes.fontSizeLg, color: greyLine),
-            ),
-          ],
-        ),
-      ),
-    );
-  */
   }
 }

@@ -1,5 +1,6 @@
-import 'package:final_task_kquotes/screens/homepage_screen.dart';
 import 'package:get/get.dart';
+
+import '../screens/login.dart';
 
 class SplashScreenController extends GetxController {
   @override
@@ -10,9 +11,9 @@ class SplashScreenController extends GetxController {
 
   void navigateToAuthScreen() {
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () {
-        Get.off(const HomePageScreen());
+        Get.off(LoginPage());
       },
     );
   }
