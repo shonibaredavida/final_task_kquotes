@@ -1,8 +1,9 @@
 # final_task_kquotes
 
-A new Flutter project.
+A new Flutter project that displays a new quote every 24hours.
 
 ## Getting Started
+![Simulator Screenshot - iPhone 16 Pro - 2025-06-01 at 22 33 59](https://github.com/user-attachments/assets/98db53aa-367b-4017-81a1-381533d10447)
 
 This project is a starting point for a Flutter application.
 
