@@ -1,6 +1,8 @@
 # final_task_kquotes
 
 A new Flutter project that displays a new quote every 24hours.
+A link to view a clip of the app 
+https://drive.google.com/file/d/1McRunMxu7jMBKCusWOKSRPsV0V-mboIA/view?usp=sharing
 
 ## Getting Started
 ![Simulator Screenshot - iPhone 16 Pro - 2025-06-01 at 22 33 59](https://github.com/user-attachments/assets/98db53aa-367b-4017-81a1-381533d10447)
